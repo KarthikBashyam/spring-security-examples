@@ -1,5 +1,8 @@
 package com.example.security.config;
 
+import java.sql.Connection;
+import java.sql.Statement;
+
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
@@ -17,7 +20,8 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 public class UserDetailsSecurityConfig {
 
 	//We can configure this by extending WebSecurityConfigurerAdpater also.
-	@Bean	
+	@Bean
+	@Profile("memory")
 	public UserDetailsService userDetailsService() {
 
 		var userDetailsManager = new InMemoryUserDetailsManager();
@@ -31,8 +35,7 @@ public class UserDetailsSecurityConfig {
 	
 	@Bean
 	@Profile("db")
-	public UserDetailsService userDetailsServiceDB(DataSource dataSource) {
-		
+	public UserDetailsService userDetailsServiceDB(DataSource dataSource) {		
 		var userDetailsManager = new JdbcUserDetailsManager(dataSource);
 		
 		return userDetailsManager;
