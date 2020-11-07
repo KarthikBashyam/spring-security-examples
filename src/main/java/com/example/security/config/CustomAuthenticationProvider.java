@@ -28,21 +28,22 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		
+
 		var userName = authentication.getName();
 		var password = String.valueOf(authentication.getCredentials());
-		
+
 		User userFromDB = userRepository.findByUserName(userName);
 		System.out.println("User from DB: " + userFromDB);
-		
-		if(passwordEncoder.matches(password, userFromDB.getPassword())) {
+
+		if (passwordEncoder.matches(password, userFromDB.getPassword())) {
 			// Without ROLE the authentication provider will not work.
-			Collection<? extends GrantedAuthority> authorities = Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+			Collection<? extends GrantedAuthority> authorities = Collections
+					.singleton(new SimpleGrantedAuthority("ROLE_USER"));
 			return new UsernamePasswordAuthenticationToken(userName, password, authorities);
 		} else {
 			throw new BadCredentialsException("Invalid Credentials!!");
 		}
-		
+
 	}
 
 	@Override

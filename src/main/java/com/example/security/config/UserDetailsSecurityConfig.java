@@ -1,8 +1,5 @@
 package com.example.security.config;
 
-import java.sql.Connection;
-import java.sql.Statement;
-
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;

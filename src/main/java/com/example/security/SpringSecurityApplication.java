@@ -17,7 +17,7 @@ import com.example.repository.UserRepository;
 public class SpringSecurityApplication {
 
 	public static void main(String[] args) {
-		System.setProperty(AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME, "memory");
+		//System.setProperty(AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME, "memory");
 		SpringApplication.run(SpringSecurityApplication.class, args);
 	}
 	
@@ -26,6 +26,7 @@ public class SpringSecurityApplication {
 		return (args) -> {
 			var user = new User("admin","admin");
 			userRepository.save(user);			
+			userRepository.flush();
 		};
 		
 	}
