@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,11 +12,12 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import com.example.entity.User;
 import com.example.repository.UserRepository;
 
-@Configuration
+@Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
@@ -40,7 +40,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			Collection<? extends GrantedAuthority> authorities = Collections
 					.singleton(new SimpleGrantedAuthority("ROLE_USER"));
 			return new UsernamePasswordAuthenticationToken(userName, password, authorities);
-		} else {
+		} else {			
 			throw new BadCredentialsException("Invalid Credentials!!");
 		}
 
