@@ -15,7 +15,7 @@ import com.example.filters.InitialAuthFilter;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private CustomAuthenticationProvider authenticationProvider;
+	private UsernamePasswordAuthenticationProvider authenticationProvider;
 	
 	@Autowired
 	private InitialAuthFilter initialAuthFilter;
@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		//http.authenticationProvider(authenticationProvider);
 		// @formatter:off
-		http.addFilterBefore(initialAuthFilter, BasicAuthenticationFilter.class)
+		http.addFilterAt(initialAuthFilter, BasicAuthenticationFilter.class)
 		.addFilterAfter(postFilter, BasicAuthenticationFilter.class)
 			.authorizeRequests()
 			.mvcMatchers("/h2-console/**")

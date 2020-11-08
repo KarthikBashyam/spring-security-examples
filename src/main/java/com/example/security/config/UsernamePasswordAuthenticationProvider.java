@@ -18,7 +18,7 @@ import com.example.entity.User;
 import com.example.repository.UserRepository;
 
 @Component
-public class CustomAuthenticationProvider implements AuthenticationProvider {
+public class UsernamePasswordAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
 	private UserRepository userRepository;
